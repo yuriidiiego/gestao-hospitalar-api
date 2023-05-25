@@ -1,0 +1,433 @@
+{
+  "info": {
+    "_postman_id": "a8eac010-d3f4-480b-9427-1065e7f32e49",
+    "name": "Gestão-Hospitalar",
+    "description": "# API de Gestão Hospitalar 🏥\n\nBem-vindo à documentação da API de Gestão Hospitalar. Esta API oferece endpoints para gerenciar médicos, pacientes e consultas médicas em um sistema de gestão hospitalar.\n\n👉 **Importante**: Certifique-se de ter as seguintes ferramentas instaladas antes de executar o projeto:\n\n- [Docker](https://www.docker.com/) 🐳\n- [Docker Compose](https://docs.docker.com/compose/install/) 🐙\n- [Maven](https://maven.apache.org/) 📦\n    \n\n## Tecnologias utilizadas 🛠️\n\nA API de Gestão Hospitalar foi desenvolvida utilizando as seguintes tecnologias:\n\n- Java 11 🚀\n- Spring Boot 2.7.11 🌟\n- Spring Security 🔒\n- Springdoc OpenAPI 📖\n- MapStruct 🗺️\n- JJWT 🔑\n- PostgreSQL 🐘\n- iText PDF 📝\n- Maven 📦\n- Docker 🐳\n    \n\n## Endpoints 📚\n\n### Médicos 👨‍⚕️\n\n| Método | Endpoint | Descrição |\n| --- | --- | --- |\n| ✅ GET | `/medicos` | Retorna uma lista de todos os médicos |\n| ✅ GET | `/medicos/{id}` | Retorna o médico com o ID especificado |\n| ✅ GET | `/medicos/periodo` | Retorna médicos que trabalharam em um período de datas |\n| ✅ GET | `/medicos/pacientes/{idPaciente}` | Retorna os médicos que atenderam um determinado paciente |\n| ✅ POST | `/medicos` | Cria um novo médico |\n| ✅ PUT | `/medicos/{id}` | Atualiza o médico com o ID especificado |\n| ✅ PATCH | `/medicos/{id}` | Atualiza parcialmente o médico com o ID especificado |\n| ❌ DELETE | `/medicos/{id}` | Exclui o médico com o ID especificado |\n\n### Pacientes 🏥\n\n| Método | Endpoint | Descrição |\n| --- | --- | --- |\n| ✅ GET | `/pacientes` | Retorna uma lista de todos os pacientes |\n| ✅ GET | `/pacientes/{id}` | Retorna o paciente com o ID especificado |\n| ✅ GET | `/pacientes/medicos/{idMedico}` | Lista os pacientes de um determinado médico |\n| ✅ GET | `/pacientes/pdf` | Gera um PDF com todos os pacientes |\n| ✅ POST | `/pacientes` | Cria um novo paciente |\n| ✅ PUT | `/pacientes/{id}` | Atualiza o paciente com o ID especificado |\n| ❌ DELETE | `/pacientes/{id}` | Exclui o paciente com o ID especificado |\n\n### Atendimentos ⚕️\n\n| Método | Endpoint | Descrição |\n| --- | --- | --- |\n| ✅ POST | `/atendimentos` | Cadastra um novo atendimento |\n| ✅ PUT | `/atendimentos/{id}` | Atualiza um atendimento |\n| ✅ GET | `/atendimentos/periodo` | Busca atendimentos por período |\n\n### Usuários 🧑‍💻\n\n| Método | Endpoint | Descrição |\n| --- | --- | --- |\n| POST | `/usuarios/login` | Loga um usuário e retorna um token JWT |\n| POST | `/usuarios/cadastro` | Cadastra um novo usuário no sistema |\n| POST | `/usuarios/logout` | Desloga um usuário |\n\n## Tabela de Dados 📋\n\nAs tabelas abaixo foram criadas para gerenciar os médicos, pacientes e consultas médicas.\n\n| Paciente | Médico | Atendimento |\n| --- | --- | --- |\n| Identificador | Identificador | Identificador |\n| Nome | Nome | Data de Atendimento |\n| CPF | CPF | Médico |\n| Data de Nascimento | CRM | Paciente |\n| Sexo | Data de Nascimento | Observação |\n|  | Sexo | Ativo/Inativo |\n\n## Executando o Projeto ▶️\n\nPara executar o projeto, siga as etapas abaixo:\n\n1. Clone o repositório em seu ambiente local.\n2. Abra o projeto em sua IDE preferida.\n3. Execute o comando `mvn clean package -DskipTests` para gerar o JAR do projeto.\n4. Execute o comando `docker-compose up -d` para iniciar os containers do projeto.\n5. Acesse a documentação da API em `http://localhost:8080/gestao-hospitalar/swagger-ui.html` para visualizar e interagir com os endpoints disponíveis.\n6. Importe o arquivo `gestao-hospitalar.postman_collection.json` que está no diretório principal do projeto no Postman para ter acesso aos endpoints já configurados.\n    \n\nAgora você está pronto para utilizar a API de Gestão Hospitalar e gerenciar médicos, pacientes e consultas médicas com facilidade. 🚀",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "17690371"
+  },
+  "item": [
+    {
+      "name": "Médico",
+      "item": [
+        {
+          "name": "Cadastra um médico",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"nome\": \"Yuri Nascimento\",\n    \"cpf\": \"70989098230\",\n    \"dataNascimento\": \"02/10/1995\",\n    \"crm\": \"982134/PA\",\n    \"sexo\": \"Masculino\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{api-host}}/medicos",
+              "host": ["{{api-host}}"],
+              "path": ["medicos"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Lista todos os médicos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{api-host}}/medicos",
+              "host": ["{{api-host}}"],
+              "path": ["medicos"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Lista médicos que trabalharam em um período de datas;",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{api-host}}/medicos/periodo?dataInicio=02/10/2022&dataFim=29/12/2022",
+              "host": ["{{api-host}}"],
+              "path": ["medicos", "periodo"],
+              "query": [
+                {
+                  "key": "dataInicio",
+                  "value": "02/10/2022"
+                },
+                {
+                  "key": "dataFim",
+                  "value": "29/12/2022"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Retorna um médico pelo ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{api-host}}/medicos/1",
+              "host": ["{{api-host}}"],
+              "path": ["medicos", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Lista todos médicos que atenderam um determinado paciente;",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{api-host}}/medicos/pacientes/1",
+              "host": ["{{api-host}}"],
+              "path": ["medicos", "pacientes", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Atualiza um médico pelo ID",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"nome\": \"Yuri Nascimento\",\n    \"cpf\": \"70989098230\",\n    \"dataNascimento\": \"02/10/1995\",\n    \"crm\": \"123416/PA\",\n    \"sexo\": \"Feminino\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{api-host}}/medicos/1",
+              "host": ["{{api-host}}"],
+              "path": ["medicos", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Deleta um médico pelo ID",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{api-host}}/medicos/1",
+              "host": ["{{api-host}}"],
+              "path": ["medicos", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Atualiza parcialmente um médico pelo ID",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"dataNascimento\":\"20/02/2020\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{api-host}}/medicos/1",
+              "host": ["{{api-host}}"],
+              "path": ["medicos", "1"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Paciente",
+      "item": [
+        {
+          "name": "Cadastra um paciente",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"nome\": \"Amanda Nascimento\",\n    \"cpf\": \"03992589226\",\n    \"dataNascimento\": \"20/03/1998\",\n    \"sexo\": \"feminino\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{api-host}}/pacientes",
+              "host": ["{{api-host}}"],
+              "path": ["pacientes"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Lista todos os pacientes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{api-host}}/pacientes",
+              "host": ["{{api-host}}"],
+              "path": ["pacientes"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Gera um pdf com todos os pacientes cadastrados no sistema",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{api-host}}/pacientes/pdf",
+              "host": ["{{api-host}}"],
+              "path": ["pacientes", "pdf"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Retorna um paciente pelo ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{api-host}}/pacientes/1",
+              "host": ["{{api-host}}"],
+              "path": ["pacientes", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Lista todos os pacientes de um determinado médico",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{api-host}}/pacientes/medicos/",
+              "host": ["{{api-host}}"],
+              "path": ["pacientes", "medicos", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Deleta um paciente pelo ID",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{api-host}}/pacientes/1",
+              "host": ["{{api-host}}"],
+              "path": ["pacientes", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Atualiza um paciente pelo ID",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"nome\": \"Amanda Nascimento\",\n    \"cpf\": \"70989098230\",\n    \"dataNascimento\": \"02/10/1995\",\n    \"sexo\": \"Feminino\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{api-host}}/pacientes/1",
+              "host": ["{{api-host}}"],
+              "path": ["pacientes", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Atualiza parcialmente um paciente pelo ID",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"nome\": \"Lula Nascimento\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{api-host}}/pacientes/1",
+              "host": ["{{api-host}}"],
+              "path": ["pacientes", "1"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Atendimento",
+      "item": [
+        {
+          "name": "Cria um atendimento",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"dataAtendimento\": \"28/12/2022\",\n    \"idMedico\": 1,\n    \"idPaciente\": 1,\n    \"observacao\": \"Alérgico ao trabalho\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{api-host}}/atendimentos",
+              "host": ["{{api-host}}"],
+              "path": ["atendimentos"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Atualiza um atendimento",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"dataAtendimento\": \"03/12/2022\",\n    \"observacao\": \"Alérgico a pomada\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{api-host}}/atendimentos/1",
+              "host": ["{{api-host}}"],
+              "path": ["atendimentos", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Lista os atendimentos entre um período de datas;",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{api-host}}/atendimentos/periodo?dataInicio=02/10/2022&dataFim=22/12/2022",
+              "host": ["{{api-host}}"],
+              "path": ["atendimentos", "periodo"],
+              "query": [
+                {
+                  "key": "dataInicio",
+                  "value": "02/10/2022"
+                },
+                {
+                  "key": "dataFim",
+                  "value": "22/12/2022"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Usuario",
+      "item": [
+        {
+          "name": "Registra um usuário",
+          "protocolProfileBehavior": {
+            "disabledSystemHeaders": {}
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"nomeUsuario\": \"teste\",\n    \"email\": \"teste@example.com\",\n    \"senha\": \"teste1234\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{api-host}}/usuarios/cadastro",
+              "host": ["{{api-host}}"],
+              "path": ["usuarios", "cadastro"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login na aplicação",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"nomeUsuario\": \"teste\",\n    \"senha\": \"teste1234\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{api-host}}/usuarios/login",
+              "host": ["{{api-host}}"],
+              "path": ["usuarios", "login"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Desloga da aplicação",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{api-host}}/usuarios/logout",
+              "host": ["{{api-host}}"],
+              "path": ["usuarios", "logout"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
