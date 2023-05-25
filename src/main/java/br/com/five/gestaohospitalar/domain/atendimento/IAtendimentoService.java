@@ -8,11 +8,11 @@ import br.com.five.gestaohospitalar.domain.atendimento.payload.request.Atendimen
 import br.com.five.gestaohospitalar.domain.atendimento.payload.response.AtendimentoResponse;
 
 public interface IAtendimentoService {
-  AtendimentoResponse salvar(AtendimentoPostRequest atendimentoPostDTO);
+  AtendimentoResponse salvar(AtendimentoPostRequest atendimentoPostRequest);
 
   AtendimentoResponse atualizar(
     Long id,
-    AtendimentoPutRequest atendimentoPutDTO
+    AtendimentoPutRequest atendimentoPutRequest
   );
 
   List<AtendimentoResponse> buscarPorPeriodo(
