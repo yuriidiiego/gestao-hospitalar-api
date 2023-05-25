@@ -25,6 +25,16 @@ A API de Gestão Hospitalar foi desenvolvida utilizando as seguintes tecnologias
 
 ## Endpoints 📚
 
+Para acessar os endpoints de `/medicos**,` `/pacientes**` e `/atendimentos**`, é necessário realizar o cadastro e fazer login, o que automaticamente fornecerá um token JWT no cookie de autenticação.
+
+ **Usuários** 🧑‍💻
+
+| Método   | Endpoint              | Descrição                               |
+| -------- | --------------------- | --------------------------------------- |
+| ✅ POST  | `/usuarios/login`     | Loga um usuário e retorna um token JWT  |
+| ✅ POST  | `/usuarios/cadastro`  | Cadastra um novo usuário no sistema     |
+| ✅ POST  | `/usuarios/logout`    | Desloga um usuário                      |
+
 **Médicos** 👨‍⚕️
 
 | Método   | Endpoint                      | Descrição                                         |
@@ -58,47 +68,6 @@ A API de Gestão Hospitalar foi desenvolvida utilizando as seguintes tecnologias
 | ✅ PUT   | `/atendimentos/{id}`          | Atualiza um atendimento                         |
 | ✅ GET   | `/atendimentos/periodo`       | Busca atendimentos por período                  |
 
- **Usuários** 🧑‍💻
-
-| Método   | Endpoint              | Descrição                               |
-| -------- | --------------------- | --------------------------------------- |
-| POST     | `/usuarios/login`     | Loga um usuário e retorna um token JWT  |
-| POST     | `/usuarios/cadastro`  | Cadastra um novo usuário no sistema     |
-| POST     | `/usuarios/logout`    | Desloga um usuário                      |
-
-## Tabela de Dados 📋
-
-As tabelas abaixo foram criadas para gerenciar os médicos, pacientes e consultas médicas.
-
-**Tabela** `Pacientes`🏥:
-| Coluna               | Tipo          | Nulo   | Descrição                        |
-| -------------------- | ------------- | ------ | -------------------------------- |
-| Identificador        |               |   ❌   | Identificador do paciente        |
-| Nome                 |               |   ❌   | Nome do paciente                 |
-| CPF                  |               |   ❌   | CPF do paciente                  |
-| Data de Nascimento   |               |   ✅   | Data de nascimento do paciente   |
-| Sexo                 |               |   ❌   | Sexo do paciente                 |
-
-**Tabela** `Médicos`👨‍⚕️:
-| Coluna               | Tipo             | Nulo   | Descrição                              |
-| -------------------- | ---------------- | ------ | -------------------------------------- |
-| id                   | bigint           | ❌     | Identificador do médico                |
-| cpf                  | varchar(11)      | ❌     | CPF do médico                          |
-| data_nascimento      | date             | ✅     | Data de nascimento do médico           |
-| nome                 | varchar(50)      | ❌     | Nome do médico                         |
-| sexo                 | varchar(10)      | ❌     | Sexo do médico                         |
-| crm                  | varchar(8)       | ❌     | CRM do médico                          |
-
-**Tabela** `Atendimentos`⚕️:
-| Coluna               | Tipo             | Nulo   | Descrição                              |
-| -------------------- | ---------------- | ------ | -------------------------------------- |
-| id                   | bigint           | ❌     | Identificador do atendimento           |
-| data_atendimento     | date             | ✅     | Data do atendimento                    |
-| observacao           | varchar(255)     | ❌     | Observação do atendimento              |
-| status_atendimento   | varchar(15)      | ❌     | Status do atendimento                  |
-| medico_id            | bigint           | ✅     | ID do médico responsável               |
-| paciente_id          | bigint           | ✅     | ID do paciente atendido                |
-
 ## Executando o Projeto ▶️
 
 Para executar o projeto, siga as etapas abaixo:
@@ -110,10 +79,10 @@ Para executar o projeto, siga as etapas abaixo:
 
 ## Documentação 📚
 
-1. Você pode acessar a documentação da API [aqui](http://localhost:8080/gestao-hospitalar/swagger-ui.html) para visualizar e interagir com os endpoints disponíveis.
+- Você pode acessar a documentação da API [aqui](http://localhost:8080/gestao-hospitalar/swagger-ui.html) para visualizar e interagir com os endpoints disponíveis.
 ![Swagger](https://img.shields.io/badge/-Swagger-000?&logo=Swagger)
 
-2. Você também pode importar o arquivo `gestao-hospitalar.postman_collection.json` que está no diretório principal do projeto e exportar no Postman para ter acesso aos endpoints já configurados.
+- Você também pode importar o arquivo `gestao-hospitalar.postman_collection.json` que está no diretório principal do projeto e exportar no Postman para ter acesso aos endpoints já configurados.
 ![Postman](https://img.shields.io/badge/-Postman-000?&logo=Postman)
 
 Agora você está pronto para utilizar a API de Gestão Hospitalar e gerenciar médicos, pacientes e consultas médicas com facilidade. 🚀
