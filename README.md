@@ -81,7 +81,6 @@ Para executar o projeto, siga as etapas abaixo:
 
 - Você pode acessar a documentação da API [aqui](http://localhost:8080/gestao-hospitalar/swagger-ui.html) para visualizar e interagir com os endpoints disponíveis.
 ![Swagger](https://img.shields.io/badge/-Swagger-000?&logo=Swagger)
-
 - Você também pode importar o arquivo `gestao-hospitalar.postman_collection.json` que está no diretório principal do projeto e exportar no Postman para ter acesso aos endpoints já configurados.
 ![Postman](https://img.shields.io/badge/-Postman-000?&logo=Postman)
 
