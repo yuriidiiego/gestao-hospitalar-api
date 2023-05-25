@@ -14,7 +14,7 @@ import org.mapstruct.MappingTarget;
 public interface AtendimentoMapper {
   @Mapping(target = "id", ignore = true)
   @Mapping(target = "statusAtendimento", ignore = true)
-  Atendimento toAtendimento(
+  Atendimento mapPostRequestToAtendimento(
     AtendimentoPostRequest atendimentoPostRequest,
     Medico medico,
     Paciente paciente
@@ -22,18 +22,18 @@ public interface AtendimentoMapper {
 
   @Mapping(target = "nomeMedico", source = "medico.nome")
   @Mapping(target = "nomePaciente", source = "paciente.nome")
-  AtendimentoResponse toAtendimentoResponse(Atendimento atendimento);
+  AtendimentoResponse mapAtendimentoToResponse(Atendimento atendimento);
 
   @Mapping(target = "id", ignore = true)
   @Mapping(target = "statusAtendimento", ignore = true)
   @Mapping(target = "medico", ignore = true)
   @Mapping(target = "paciente", ignore = true)
-  Atendimento toAtendimento(
+  Atendimento mapPutRequestToAtendimento(
     AtendimentoPutRequest atendimentoPutRequest,
     @MappingTarget Atendimento atendimento
   );
 
-  List<AtendimentoResponse> toAtendimentoResponse(
+  List<AtendimentoResponse> mapAtendimentoListToResponseList(
     List<Atendimento> atendimentos
   );
 }

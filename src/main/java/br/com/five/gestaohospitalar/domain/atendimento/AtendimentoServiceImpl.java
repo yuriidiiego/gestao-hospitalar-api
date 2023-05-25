@@ -49,8 +49,8 @@ public class AtendimentoServiceImpl implements IAtendimentoService {
     return atendimentoRepository
       .findById(id)
       .map(atendimento -> {
-        atendimentoMapper.toAtendimento(atendimentoPutDTO, atendimento);
-        return atendimentoMapper.toAtendimentoResponse(
+        atendimentoMapper.mapPutRequestToAtendimento(atendimentoPutDTO, atendimento);
+        return atendimentoMapper.mapAtendimentoToResponse(
           atendimentoRepository.save(atendimento)
         );
       })
@@ -67,7 +67,7 @@ public class AtendimentoServiceImpl implements IAtendimentoService {
     LocalDate dataInicio,
     LocalDate dataFim
   ) {
-    return atendimentoMapper.toAtendimentoResponse(
+    return atendimentoMapper.mapAtendimentoListToResponseList(
       atendimentoRepository.buscaAtendimentosPorPeriodo(dataInicio, dataFim)
     );
   }
@@ -77,9 +77,9 @@ public class AtendimentoServiceImpl implements IAtendimentoService {
     Medico medico,
     Paciente paciente
   ) {
-    return atendimentoMapper.toAtendimentoResponse(
+    return atendimentoMapper.mapAtendimentoToResponse(
       atendimentoRepository.save(
-        atendimentoMapper.toAtendimento(atendimentoPostDTO, medico, paciente)
+        atendimentoMapper.mapPostRequestToAtendimento(atendimentoPostDTO, medico, paciente)
       )
     );
   }
